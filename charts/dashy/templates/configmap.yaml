@@ -1,0 +1,11 @@
+{{- if .Values.static.enabled -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "dashy.fullname" . }}
+  labels:
+    {{- include "dashy.labels" . | nindent 4 }}
+data:
+  conf.yaml: |
+    {{- toYaml  .Values.static.config . | nindent 4 }}
+{{- end -}}
