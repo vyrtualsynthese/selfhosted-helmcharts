@@ -8,6 +8,8 @@ spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
+  strategy:
+    type: {{ .Values.strategyType | default "Recreate" }}
   selector:
     matchLabels:
       {{- include "dashy.selectorLabels" . | nindent 6 }}
@@ -36,32 +38,52 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.env}}
+          {{- range .Values.env }}
           env:
-            - name: NODE_ENV
-              value: "production"
+            - name: {{ .name }}
+              value: {{ .value }}
+          {{- end }}
+          {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           livenessProbe:
-            httpGet:
-              path: /
-              port: http
+            exec:
+              command:
+                - yarn
+                - health-check
+            failureThreshold: 1
+            periodSeconds: 10
           readinessProbe:
-            httpGet:
-              path: /
-              port: http
+            exec:
+              command:
+                - yarn
+                - health-check
+            failureThreshold: 30
+            periodSeconds: 10
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           {{- with .Values.volumeMounts }}
           volumeMounts:
+            {{ if $.Values.static.enabled.true }}
             - mountPath: /app/public/conf.yml
               subPath: conf.yml
               name: dashy-conf
+            {{ end }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
       {{- with .Values.volumes }}
       volumes:
+        {{ if $.Values.static.enabled.true }}
+        - name: dashy-conf
+          configMap:
+            name: dashy
+            items:
+              - key: conf
+                path: conf.yml
+        {{ end }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- with .Values.nodeSelector }}
