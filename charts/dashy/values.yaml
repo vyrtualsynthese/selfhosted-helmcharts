@@ -99,10 +99,10 @@ affinity: {}
 
 static:
   # If set to true, configuration will be overwritten on every new releases.
-  enabled: True
+  enabled: true
 
   # Set to true if your prefer your conf.yml to be set in a kubernetes secret. Could be useful if it contains hashed password.
-  secret: False
+  secret: false
 
   # Customize config.yaml https://github.com/Lissy93/dashy/blob/master/docs/configuring.md for more information.
   configMapContent:

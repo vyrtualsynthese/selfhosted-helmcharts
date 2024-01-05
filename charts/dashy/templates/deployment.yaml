@@ -74,25 +74,24 @@ spec:
             periodSeconds: 90
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          {{- with .Values.volumeMounts }}
           volumeMounts:
-            {{ if $.Values.static.enabled.true }}
+            {{ if .Values.static.enabled }}
             - mountPath: /app/public/conf.yml
               subPath: conf.yml
               name: dashy-conf
             {{ end }}
+          {{- with .Values.volumeMounts }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
-      {{- with .Values.volumes }}
       volumes:
-        {{ if and ($.Values.static.enabled) (not $.Values.static.secret) }}
+        {{ if and (.Values.static.enabled) (not .Values.static.secret) }}
         - name: dashy-conf
           configMap:
             name: dashy
             items:
               - key: conf
                 path: conf.yml
-        {{ else if and ($.Values.static.enabled) ($.Values.static.secret.true) }}
+        {{ else if and (.Values.static.enabled) (.Values.static.secret) }}
         - name: dashy-conf
           secret:
             secretName: dashy
@@ -100,6 +99,7 @@ spec:
               - key: conf
                 path: conf.yml
         {{ end }}
+      {{- with .Values.volumes }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- with .Values.nodeSelector }}
