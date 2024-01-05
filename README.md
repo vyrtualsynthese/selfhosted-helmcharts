@@ -58,7 +58,7 @@ This is a collection of helm chart to boostrap your self hosted applications in 
 ### Installation
 
 ```console
-helm repo add self-hosted https://vyrtualsynthese.github.io/selfhosted-helmchart/
+helm repo add self-hosted https://vyrtualsynthese.github.io/selfhosted-helmcharts/
 helm repo update
 ```
 

@@ -10,7 +10,7 @@ This is a collection of helm chart to boostrap your self hosted applications in 
 ## Get Repo Info
 
 ```console
-helm repo add self-hosted https://vyrtualsynthese.github.io/selfhosted-helmchart/
+helm repo add selfhosted-helmcharts https://vyrtualsynthese.github.io/selfhosted-helmcharts/
 helm repo update
 ```
 
@@ -20,7 +20,7 @@ _See [helm repo](https://helm.sh/docs/helm/helm_repo/) for command documentation
 
 ```console
 # Helm
-$ helm install [RELEASE_NAME] self-hosted/dashy
+$ helm install [RELEASE_NAME] selfhosted-helmcharts/dashy
 ```
 
 _See [configuration](#configuration) below._
