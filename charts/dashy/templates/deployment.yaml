@@ -85,10 +85,17 @@ spec:
           {{- end }}
       {{- with .Values.volumes }}
       volumes:
-        {{ if $.Values.static.enabled.true }}
+        {{ if and ($.Values.static.enabled) (not $.Values.static.secret) }}
         - name: dashy-conf
           configMap:
             name: dashy
+            items:
+              - key: conf
+                path: conf.yml
+        {{ else if and ($.Values.static.enabled) ($.Values.static.secret.true) }}
+        - name: dashy-conf
+          secret:
+            secretName: dashy
             items:
               - key: conf
                 path: conf.yml
