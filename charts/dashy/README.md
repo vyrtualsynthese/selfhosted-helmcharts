@@ -1,6 +1,12 @@
-# Selfhosted Helm Chart
+# Dashy Helm Chart
 
-This is a collection of helm chart to boostrap your self hosted applications in your Kubernetes cluster.
+Dashy helps you organize your self-hosted services by making them accessible from a single place.
+
+## Original Project
+
++ Website: https://dashy.to/
++ Doc: https://dashy.to/docs
++ Repo: https://github.com/Lissy93/dashy
 
 ## Prerequisites
 
@@ -60,3 +66,9 @@ $ helm show values self-hosted/dashy
 ```
 
 You may similarly use the above configuration commands on each chart [dependency](#dependencies) to see it's configurations.
+
+### To use secrets
+Create a file same as your conf.yml names secret.yml
+```console
+helm upgrade dashy selfhosted-helmcharts/dashy  --set-file static.configMapContent.conf=secret.yml -n dashy
+```
