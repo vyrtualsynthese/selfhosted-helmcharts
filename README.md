@@ -10,7 +10,7 @@ This is a collection of helm chart to boostrap your self hosted applications in 
 ## Get Repo Info
 
 ```console
-helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo add self-hosted https://vyrtualsynthese.github.io/selfhosted-helmchart/
 helm repo update
 ```
 

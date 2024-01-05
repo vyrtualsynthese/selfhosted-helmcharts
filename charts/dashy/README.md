@@ -10,8 +10,7 @@ This is a collection of helm chart to boostrap your self hosted applications in 
 ## Get Repo Info
 
 ```console
-helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm repo add kube-state-metrics https://kubernetes.github.io/kube-state-metrics
+helm repo add self-hosted https://vyrtualsynthese.github.io/selfhosted-helmchart/
 helm repo update
 ```
 
@@ -21,7 +20,7 @@ _See [helm repo](https://helm.sh/docs/helm/helm_repo/) for command documentation
 
 ```console
 # Helm
-$ helm install [RELEASE_NAME] prometheus-community/prometheus
+$ helm install [RELEASE_NAME] self-hosted/dashy
 ```
 
 _See [configuration](#configuration) below._
@@ -54,16 +53,10 @@ See [Customizing the Chart Before Installing](https://helm.sh/docs/intro/using_h
 
 ```console
 # Helm 2
-$ helm inspect values prometheus-community/prometheus
+$ helm inspect values self-hosted/dashy
 
 # Helm 3
-$ helm show values prometheus-community/prometheus
+$ helm show values self-hosted/dashy
 ```
 
 You may similarly use the above configuration commands on each chart [dependency](#dependencies) to see it's configurations.
-
-### ConfigMap Files
-
-AlertManager is configured through [alertmanager.yml](https://prometheus.io/docs/alerting/configuration/). This file (and any others listed in `alertmanagerFiles`) will be mounted into the `alertmanager` pod.
-
-Prometheus is configured through [prometheus.yml](https://prometheus.io/docs/operating/configuration/). This file (and any others listed in `serverFiles`) will be mounted into the `server` pod.
