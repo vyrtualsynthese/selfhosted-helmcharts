@@ -6,6 +6,5 @@ metadata:
   labels:
     {{- include "dashy.labels" . | nindent 4 }}
 data:
-  conf.yaml: |
-    {{- toYaml  .Values.static.config . | nindent 4 }}
+  {{- toJson .Values.static.configMapContent | nindent 2 }}
 {{- end -}}
