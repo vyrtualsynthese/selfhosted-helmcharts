@@ -3,6 +3,16 @@ entries:
   dashy:
   - apiVersion: v2
     appVersion: 2.1.1
+    created: "2024-01-05T22:39:03.974554251Z"
+    description: "A dashboard for your homelab \U0001F680"
+    digest: e0902408997aa152601355d83a6ad818cfafaa43525009c1671673b6cb53d87d
+    name: dashy
+    type: application
+    urls:
+    - https://github.com/vyrtualsynthese/selfhosted-helmcharts/releases/download/dashy-0.1.3/dashy-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: 2.1.1
     created: "2024-01-05T20:59:57.086626856Z"
     description: "A dashboard for your homelab \U0001F680"
     digest: 007a0ee14ee2b4ab7eb043e784c1e2586ececd0867a20820cdd42b9239d59333
@@ -21,4 +31,4 @@ entries:
     urls:
     - https://github.com/vyrtualsynthese/selfhosted-helmchart/releases/download/dashy-0.1.0/dashy-0.1.0.tgz
     version: 0.1.0
-generated: "2024-01-05T20:59:57.086635893Z"
+generated: "2024-01-05T22:39:03.974571854Z"
