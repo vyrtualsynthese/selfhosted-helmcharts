@@ -81,10 +81,6 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-env:
-  - name: NODE_ENV
-    value: "production"
-
 # Additional volumes on the output Deployment definition.
 volumes: []
 
@@ -97,12 +93,22 @@ tolerations: []
 
 affinity: {}
 
+env:
+  NODE_ENV: "production"
+  PORT: "80"
+  #HOST: ""
+  #BASE_URL: ""
+  #VUE_APP_DOMAIN: ""
+  #INTEGRITY: ""
+  # -- Set this to the name of a secret to load environment variables from. If defined, values in the secret will override values in configs
+  existingSecret: ""
+
 static:
   # If set to true, configuration will be overwritten on every new releases.
   enabled: true
 
-  # Set to true if your prefer your conf.yml to be set in a kubernetes secret. Could be useful if it contains hashed password.
-  secret: false
+  # -- Set this to the name of a secret to load configuration from. If defined, values in the secret will override values in configs
+  existingSecret: ""
 
   # Customize config.yaml https://github.com/Lissy93/dashy/blob/master/docs/configuring.md for more information.
   configMapContent:
