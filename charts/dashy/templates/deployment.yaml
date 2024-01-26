@@ -96,7 +96,7 @@ spec:
         {{ else if and (.Values.static.enabled) (.Values.static.existingSecret) }}
         - name: {{ include "dashy.fullname" . }}-conf
           secret:
-            secretName: {{ include "dashy.fullname" . }}-conf
+            secretName: {{ .Values.static.existingSecret }}
             items:
               - key: conf
                 path: conf.yml
