@@ -1,0 +1,75 @@
+{{ if .Values.backupSchedule }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: {{ template "fullname" . }}-backup
+  labels:
+    app: {{ template "name" . }}
+    chart: {{ template "chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  schedule: "{{ .Values.backupSchedule }}"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: {{ template "fullname" . }}
+              image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+              imagePullPolicy: IfNotPresent
+              {{- if .Values.configs}}
+              envFrom:
+                {{- if not .Values.configs.existingSecret }}
+                - configMapRef:
+                    name: {{ template "fullname" . }}-config
+                {{- else }}
+                - secretRef:
+                    name: {{ .Values.configs.existingSecret }}
+                {{- end }}
+              {{- end }}
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  set -e
+                  echo "creating backup file"
+                  build_pg_dump_command() {
+                      local command="pg_dump"
+                      if [ -n "$DBHOST" ]
+                      then command="$command -h $DBHOST"
+                      fi
+                      if [ -n "$DBPORT" ]
+                      then command="$command -p $DBPORT"
+                      fi
+                      if [ -n "$POSTGRES_USER" ]
+                      then command="$command -U $POSTGRES_USER"
+                      else command="$command -U postgres"
+                      fi
+                      if [ -n "$POSTGRES_DB" ]
+                      then command="$command -d $POSTGRES_DB"
+                      else command="$command -d postgres"
+                      fi
+
+                      command="$command --format=p --clean"
+
+                      echo "$command"
+                  }
+
+                  pg_dump_command=$(build_pg_dump_command)
+                  eval "$pg_dump_command > /var/lib/backup/$POSTGRES_DB.sql"
+                  ls -la /var/lib/backup/
+
+                  echo "done"
+              volumeMounts:
+                - name: backup-storage
+                  mountPath: /var/lib/backup
+          restartPolicy: Never
+          volumes:
+            - name: backup-storage
+              persistentVolumeClaim:
+                claimName: {{ default (printf "%s-%s" (include "fullname" .) "backup") .Values.backup.pvc.existingClaim }}
+{{ end }}

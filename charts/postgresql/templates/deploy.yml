@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "fullname" . }}
+  labels:
+    {{- include "labels" . | nindent 4 }}
+spec:
+  strategy:
+    type: {{ .Values.strategyType | default "Recreate" }}
+  selector:
+    matchLabels:
+      {{- include "selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "labels" . | nindent 8 }}
+ {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+      - name: {{ .Chart.Name }}
+        securityContext:
+          {{- toYaml .Values.securityContext | nindent 12 }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+          - name: http
+            containerPort: {{ .Values.service.port }}
+            protocol: TCP
+        {{- if .Values.configs}}
+        envFrom:
+        {{- if not .Values.configs.existingSecret }}
+        - configMapRef:
+            name: {{ template "fullname" . }}-config
+        {{- else }}
+        - secretRef:
+            name: {{ .Values.configs.existingSecret }}
+        {{- end }}
+        {{- end }}
+        resources:
+          {{- toYaml .Values.resources | nindent 12 }}
+        volumeMounts:
+          - name: db-storage
+            mountPath: /var/lib/postgresql/data
+            subPath: data
+        {{- with .Values.volumeMounts }}
+          {{- toYaml . | nindent 12 }}
+        {{- end }}
+      volumes:
+        - name: db-storage
+          persistentVolumeClaim:
+            claimName: {{ default (printf (include "fullname" .)) .Values.storage.existingClaim }}
+      {{- with .Values.volumes }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+       {{- toYaml . | nindent 8 }}
+     {{- end }}
+     {{- with .Values.affinity }}
+      affinity:
+       {{- toYaml . | nindent 8 }}
+     {{- end }}
+     {{- with .Values.tolerations }}
+      tolerations:
+       {{- toYaml . | nindent 8 }}
+     {{- end }}
