@@ -64,4 +64,14 @@ entries:
     urls:
     - https://github.com/vyrtualsynthese/selfhosted-helmchart/releases/download/dashy-0.1.0/dashy-0.1.0.tgz
     version: 0.1.0
-generated: "2024-01-27T13:08:13.940933592Z"
+  postgres:
+  - apiVersion: v2
+    created: "2024-01-27T22:00:11.695981384Z"
+    description: Installs a postgres db
+    digest: f44fe0ab2cf28ecf1e0236160acd2930bfe71d61c345037a9d9253f2db4fdbd7
+    name: postgres
+    type: application
+    urls:
+    - https://github.com/vyrtualsynthese/selfhosted-helmcharts/releases/download/postgres-0.1.0/postgres-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-01-27T22:00:11.696030715Z"
