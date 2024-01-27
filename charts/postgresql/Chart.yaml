@@ -1,0 +1,5 @@
+apiVersion: v2
+name: postgres
+version: 0.1.0
+description: Installs a postgres db
+type: application

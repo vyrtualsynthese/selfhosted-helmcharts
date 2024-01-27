@@ -1,0 +1,18 @@
+{{- if not .Values.configs.existingSecret -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: {{ template "fullname" . }}-config
+  labels:
+    app: {{ template "name" . }}
+    chart: {{ template "chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+data:
+{{- range $key, $value := .Values.configs }}
+  {{ $key }}: {{ $value | quote }}
+{{- end }}
+  DBHOST: "{{ include "fullname" . }}"
+  DBPORT: "{{ printf (toJson .Values.service.port) }}"
+{{- end }}
