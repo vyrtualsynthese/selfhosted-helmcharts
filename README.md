@@ -1,6 +1,6 @@
 # Selfhosted Helm Chart
 
-This is a collection of helm chart to boostrap your self hosted applications in your Kubernetes cluster.
+This is a collection of helm chart to boostrap your self-hosted applications in your Kubernetes cluster.
 
 ## Prerequisites
 
@@ -10,7 +10,7 @@ This is a collection of helm chart to boostrap your self hosted applications in 
 ## Get Repo Info
 
 ```console
-helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo add selfhosted-helmcharts https://github.com/vyrtualsynthese/selfhosted-helmcharts/
 helm repo update
 ```
 
