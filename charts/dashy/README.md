@@ -66,9 +66,3 @@ $ helm show values self-hosted/dashy
 ```
 
 You may similarly use the above configuration commands on each chart [dependency](#dependencies) to see it's configurations.
-
-### To use secrets
-Create a file same as your conf.yml names secret.yml
-```console
-helm upgrade dashy selfhosted-helmcharts/dashy  --set-file static.configMapContent.conf=secret.yml -n dashy
-```
