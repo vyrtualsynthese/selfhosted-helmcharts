@@ -64,7 +64,40 @@ entries:
     urls:
     - https://github.com/vyrtualsynthese/selfhosted-helmchart/releases/download/dashy-0.1.0/dashy-0.1.0.tgz
     version: 0.1.0
+  firefly-iii-stack:
+  - apiVersion: v2
+    created: "2024-01-30T20:28:05.158384192Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: https://vyrtualsynthese.github.io/selfhosted-helmcharts/
+      version: 0.1.0
+    - condition: firefly-iii.enabled
+      name: firefly-iii
+      repository: https://firefly-iii.github.io/kubernetes/
+      version: 1.7.2
+    - condition: importer.enabled
+      name: importer
+      repository: https://firefly-iii.github.io/kubernetes/
+      version: 1.3.1
+    description: Installs Firefly III stack (db, app, importer)
+    digest: edc68e579c306e337b02a6d46a56d099e0af165ad54230da11fb25cea7dd9ec7
+    name: firefly-iii-stack
+    type: application
+    urls:
+    - https://github.com/vyrtualsynthese/selfhosted-helmcharts/releases/download/firefly-iii-stack-0.1.0/firefly-iii-stack-0.1.0.tgz
+    version: 0.1.0
   postgres:
+  - apiVersion: v2
+    appVersion: "16.1"
+    created: "2024-01-30T20:28:05.255297418Z"
+    description: Installs a postgres db
+    digest: 423051e6ba69f205d86f24cc2839e5d66b3343b9a21aa68b2788ba445fa478a1
+    name: postgres
+    type: application
+    urls:
+    - https://github.com/vyrtualsynthese/selfhosted-helmcharts/releases/download/postgres-0.1.1/postgres-0.1.1.tgz
+    version: 0.1.1
   - apiVersion: v2
     created: "2024-01-27T22:00:11.695981384Z"
     description: Installs a postgres db
@@ -74,4 +107,4 @@ entries:
     urls:
     - https://github.com/vyrtualsynthese/selfhosted-helmcharts/releases/download/postgres-0.1.0/postgres-0.1.0.tgz
     version: 0.1.0
-generated: "2024-01-27T22:00:11.696030715Z"
+generated: "2024-01-30T20:28:05.255316984Z"
