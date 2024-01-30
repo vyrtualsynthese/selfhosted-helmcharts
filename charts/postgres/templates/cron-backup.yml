@@ -3,10 +3,10 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   namespace: {{ .Release.Namespace }}
-  name: {{ template "fullname" . }}-backup
+  name: {{ template "postgres.fullname" . }}-backup
   labels:
-    app: {{ template "name" . }}
-    chart: {{ template "chart" . }}
+    app: {{ template "postgres.name" . }}
+    chart: {{ template "postgres.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
@@ -18,14 +18,14 @@ spec:
       template:
         spec:
           containers:
-            - name: {{ template "fullname" . }}
+            - name: {{ template "postgres.fullname" . }}
               image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
               imagePullPolicy: IfNotPresent
               {{- if .Values.configs}}
               envFrom:
                 {{- if not .Values.configs.existingSecret }}
                 - configMapRef:
-                    name: {{ template "fullname" . }}-config
+                    name: {{ template "postgres.fullname" . }}-config
                 {{- else }}
                 - secretRef:
                     name: {{ .Values.configs.existingSecret }}
@@ -71,5 +71,5 @@ spec:
           volumes:
             - name: backup-storage
               persistentVolumeClaim:
-                claimName: {{ default (printf "%s-%s" (include "fullname" .) "backup") .Values.backup.pvc.existingClaim }}
+                claimName: {{ default (printf "%s-%s" (include "postgres.fullname" .) "backup") .Values.backup.pvc.existingClaim }}
 {{ end }}

@@ -3,16 +3,16 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   namespace: {{ .Release.Namespace }}
-  name: {{ template "fullname" . }}-config
+  name: {{ template "postgres.fullname" . }}-config
   labels:
-    app: {{ template "name" . }}
-    chart: {{ template "chart" . }}
+    app: {{ template "postgres.name" . }}
+    chart: {{ template "postgres.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 data:
 {{- range $key, $value := .Values.configs }}
   {{ $key }}: {{ $value | quote }}
 {{- end }}
-  DBHOST: "{{ include "fullname" . }}"
+  DBHOST: "{{ include "postgres.fullname" . }}"
   DBPORT: "{{ printf (toJson .Values.service.port) }}"
 {{- end }}
