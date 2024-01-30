@@ -7,7 +7,7 @@ dependencies:
   - name: postgres
     version: 0.1.0
     condition: postgres.enabled
-    repository: https://github.com/vyrtualsynthese/selfhosted-helmcharts/tree/main
+    repository: https://vyrtualsynthese.github.io/selfhosted-helmcharts/
   - name: firefly-iii
     version: 1.7.2
     condition: firefly-iii.enabled
