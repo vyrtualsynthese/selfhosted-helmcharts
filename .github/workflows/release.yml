@@ -26,6 +26,10 @@ jobs:
       - name: Install Helm
         uses: azure/setup-helm@v3
 
+      - name: Add Helm repos
+        run: |
+          helm repo add firefly-iii https://firefly-iii.github.io/kubernetes/
+
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
         with:
