@@ -28,6 +28,6 @@ firefly-iii:
   # -- Set to false to not deploy Firefly III
   enabled: true
 
-firefly-iii-importer:
+importer:
   # -- Set to false to not deploy the importer
   enabled: true
