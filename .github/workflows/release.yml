@@ -10,7 +10,9 @@ jobs:
     # depending on default permission settings for your org (contents being read-only or read-write for workloads), you will have to add permissions
     # see: https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token
     permissions:
-      contents: write
+      contents: write # to push chart release and create a release (helm/chart-releaser-action)
+      packages: write # needed for ghcr access
+
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -29,11 +31,12 @@ jobs:
       - name: Add Helm repos
         run: |
           helm repo add firefly-iii https://firefly-iii.github.io/kubernetes/
-          helm repo update
+          helm repo add selfhosted-helmcharts https://vyrtualsynthese.github.io/selfhosted-helmcharts/
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
         with:
+          charts_dir: charts
           skip_existing: true
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
