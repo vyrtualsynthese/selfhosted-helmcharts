@@ -6,7 +6,7 @@ type: application
 dependencies:
   - name: postgres
     version: 0.1.0
-    condition: firefly-db.enabled
+    condition: postgres.enabled
     repository: https://github.com/vyrtualsynthese/selfhosted-helmcharts/tree/main
   - name: firefly-iii
     version: 1.7.2
