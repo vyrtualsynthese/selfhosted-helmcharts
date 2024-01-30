@@ -1,15 +1,15 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "fullname" . }}
+  name: {{ include "postgres.fullname" . }}
   labels:
-    {{- include "labels" . | nindent 4 }}
+    {{- include "postgres.labels" . | nindent 4 }}
 spec:
   strategy:
     type: {{ .Values.strategyType | default "Recreate" }}
   selector:
     matchLabels:
-      {{- include "selectorLabels" . | nindent 6 }}
+      {{- include "postgres.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -17,7 +17,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "labels" . | nindent 8 }}
+        {{- include "postgres.labels" . | nindent 8 }}
  {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
@@ -26,7 +26,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "serviceAccountName" . }}
+      serviceAccountName: {{ include "postgres.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -43,7 +43,7 @@ spec:
         envFrom:
         {{- if not .Values.configs.existingSecret }}
         - configMapRef:
-            name: {{ template "fullname" . }}-config
+            name: {{ template "postgres.fullname" . }}-config
         {{- else }}
         - secretRef:
             name: {{ .Values.configs.existingSecret }}
@@ -61,7 +61,7 @@ spec:
       volumes:
         - name: db-storage
           persistentVolumeClaim:
-            claimName: {{ default (printf (include "fullname" .)) .Values.storage.existingClaim }}
+            claimName: {{ default (printf (include "postgres.fullname" .)) .Values.storage.existingClaim }}
       {{- with .Values.volumes }}
         {{- toYaml . | nindent 8 }}
       {{- end }}

@@ -2,9 +2,9 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "fullname" . }}
+  name: {{ include "postgres.fullname" . }}
   labels:
-    {{- include "labels" . | nindent 4 }}
+    {{- include "postgres.labels" . | nindent 4 }}
 spec:
   {{- with .Values.storage.class }}
   storageClassName: {{ . }}
