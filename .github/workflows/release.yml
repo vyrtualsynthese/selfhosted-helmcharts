@@ -29,6 +29,7 @@ jobs:
       - name: Add Helm repos
         run: |
           helm repo add firefly-iii https://firefly-iii.github.io/kubernetes/
+          helm repo update
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
