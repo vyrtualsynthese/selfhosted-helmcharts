@@ -3,6 +3,17 @@ entries:
   dashy:
   - apiVersion: v2
     appVersion: 2.1.1
+    created: "2024-02-05T14:39:59.000423872Z"
+    description: "A dashboard for your homelab \U0001F680"
+    digest: 2985bbfe356e4d406f1446f2dde1c45ee6bdbaa7cfe2b151ce2abd4714f6a29e
+    icon: https://dashy.to/img/dashy.png
+    name: dashy
+    type: application
+    urls:
+    - https://github.com/vyrtualsynthese/selfhosted-helmcharts/releases/download/dashy-0.1.7/dashy-0.1.7.tgz
+    version: 0.1.7
+  - apiVersion: v2
+    appVersion: 2.1.1
     created: "2024-01-27T13:08:13.940888208Z"
     description: "A dashboard for your homelab \U0001F680"
     digest: c1fa7a04262fa5681e9d4342a4b153aeeb74aff3a496003342ff7b4dc80384d2
@@ -90,6 +101,16 @@ entries:
   postgres:
   - apiVersion: v2
     appVersion: "16.1"
+    created: "2024-02-05T14:39:59.234437578Z"
+    description: Installs a postgres db
+    digest: 1c72cee9d89881f01ac165f7c47377b88c8f5cf55415c12dfb86775f1f403c34
+    name: postgres
+    type: application
+    urls:
+    - https://github.com/vyrtualsynthese/selfhosted-helmcharts/releases/download/postgres-0.1.2/postgres-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: "16.1"
     created: "2024-01-30T20:28:05.255297418Z"
     description: Installs a postgres db
     digest: 423051e6ba69f205d86f24cc2839e5d66b3343b9a21aa68b2788ba445fa478a1
@@ -107,4 +128,4 @@ entries:
     urls:
     - https://github.com/vyrtualsynthese/selfhosted-helmcharts/releases/download/postgres-0.1.0/postgres-0.1.0.tgz
     version: 0.1.0
-generated: "2024-01-30T20:28:05.255316984Z"
+generated: "2024-02-05T14:39:59.234472383Z"
