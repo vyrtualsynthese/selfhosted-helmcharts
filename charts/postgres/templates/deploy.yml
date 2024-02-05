@@ -54,10 +54,43 @@ spec:
         volumeMounts:
           - name: db-storage
             mountPath: /var/lib/postgresql/data
-            subPath: data
+            subPath: postgres-data
         {{- with .Values.volumeMounts }}
           {{- toYaml . | nindent 12 }}
         {{- end }}
+        startupProbe:
+          exec:
+            command:
+              - /bin/sh
+              - -c
+              - exec pg_isready -U {{ default "postgres" .Values.configs.POSTGRES_USER | quote }} -d "dbname={{ .Values.configs.POSTGRES_DB }}" -h 127.0.0.1 -p {{ .Values.service.port }}
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 1
+          failureThreshold: 15
+          successThreshold: 1
+        livenessProbe:
+          exec:
+            command:
+              - /bin/sh
+              - -c
+              - exec pg_isready -U {{ default "postgres" .Values.configs.POSTGRES_USER | quote }} -d "dbname={{ .Values.configs.POSTGRES_DB }}" -h 127.0.0.1 -p {{ .Values.service.port }}
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 6
+          successThreshold: 1
+        readinessProbe:
+          exec:
+            command:
+              - /bin/sh
+              - -c
+              - exec pg_isready -U {{ default "postgres" .Values.configs.POSTGRES_USER | quote }} -d "dbname={{ .Values.configs.POSTGRES_DB }}" -h 127.0.0.1 -p {{ .Values.service.port }}
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 6
+          successThreshold: 1
       volumes:
         - name: db-storage
           persistentVolumeClaim:

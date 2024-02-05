@@ -15,4 +15,7 @@ data:
 {{- end }}
   DBHOST: "{{ include "postgres.fullname" . }}"
   DBPORT: "{{ printf (toJson .Values.service.port) }}"
+  PGDATA: "{{ .Values.configs.PGDATA }}"
+  POSTGRES_USER: "{{ .Values.configs.POSTGRES_USER }}"
+  POSTGRES_HOST_AUTH_METHOD: "{{ .Values.configs.POSTGRES_HOST_AUTH_METHOD }}"
 {{- end }}
