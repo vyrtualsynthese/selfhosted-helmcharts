@@ -32,6 +32,19 @@ entries:
   bazarr:
   - apiVersion: v2
     appVersion: 1.4.1
+    created: "2024-02-07T18:01:20.496822957Z"
+    description: Bazarr is a companion application to Sonarr and Radarr. It manages
+      and downloads subtitles based on your requirements. You define your preferences
+      by TV show or movie and Bazarr takes care of everything for you.
+    digest: f2e7ba70fd81e5dcdd7e5084b996ee2fcbb7df4336be511fee52fd2de773e6e2
+    icon: https://www.bazarr.media/assets/img/logo.png
+    name: bazarr
+    type: application
+    urls:
+    - https://github.com/vyrtualsynthese/selfhosted-helmcharts/releases/download/bazarr-0.1.1/bazarr-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.4.1
     created: "2024-02-07T16:55:37.838021521Z"
     description: Bazarr is a companion application to Sonarr and Radarr. It manages
       and downloads subtitles based on your requirements. You define your preferences
@@ -192,4 +205,4 @@ entries:
     urls:
     - https://github.com/vyrtualsynthese/selfhosted-helmcharts/releases/download/postgres-0.1.0/postgres-0.1.0.tgz
     version: 0.1.0
-generated: "2024-02-07T16:55:37.838054061Z"
+generated: "2024-02-07T18:01:20.496852663Z"
