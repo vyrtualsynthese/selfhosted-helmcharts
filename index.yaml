@@ -1,6 +1,32 @@
 apiVersion: v1
 entries:
+  autobrr:
+  - apiVersion: v2
+    appVersion: 1.36.0
+    created: "2024-02-07T10:51:25.483981Z"
+    description: autobrr redefines download automation for torrents and Usenet, drawing
+      inspiration from tools like trackarr, autodl-irssi, and flexget. We've combined
+      the best of these worlds into one versatile tool that can do it all, and then
+      some.
+    digest: b0a8d502ee54bb9bfd55fc366d3a62e25b45d37024094fe703e61ed5d9dbe7af
+    icon: https://github.com/autobrr/autobrr/blob/develop/.github/images/logo.png
+    name: autobrr
+    type: application
+    urls:
+    - https://github.com/vyrtualsynthese/selfhosted-helmcharts/releases/download/autobrr-0.1.0/autobrr-0.1.0.tgz
+    version: 0.1.0
   dashy:
+  - apiVersion: v2
+    appVersion: 2.1.1
+    created: "2024-02-07T10:51:25.736017872Z"
+    description: "A dashboard for your homelab \U0001F680"
+    digest: 2f86cab930a3c77768affdb151a3f973bfb3d15ba08ab39804ac7bd1e8e6be05
+    icon: https://dashy.to/img/dashy.png
+    name: dashy
+    type: application
+    urls:
+    - https://github.com/vyrtualsynthese/selfhosted-helmcharts/releases/download/dashy-0.1.8/dashy-0.1.8.tgz
+    version: 0.1.8
   - apiVersion: v2
     appVersion: 2.1.1
     created: "2024-02-05T14:39:59.000423872Z"
@@ -101,6 +127,16 @@ entries:
   postgres:
   - apiVersion: v2
     appVersion: "16.1"
+    created: "2024-02-07T10:51:25.911192481Z"
+    description: Installs a postgres db
+    digest: f34aeb2262d5af66f4b0e75d307e4916d926cefd6d6a5e56d36924bf0e1ab060
+    name: postgres
+    type: application
+    urls:
+    - https://github.com/vyrtualsynthese/selfhosted-helmcharts/releases/download/postgres-0.1.3/postgres-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: "16.1"
     created: "2024-02-05T14:39:59.234437578Z"
     description: Installs a postgres db
     digest: 1c72cee9d89881f01ac165f7c47377b88c8f5cf55415c12dfb86775f1f403c34
@@ -128,4 +164,4 @@ entries:
     urls:
     - https://github.com/vyrtualsynthese/selfhosted-helmcharts/releases/download/postgres-0.1.0/postgres-0.1.0.tgz
     version: 0.1.0
-generated: "2024-02-05T14:39:59.234472383Z"
+generated: "2024-02-07T10:51:25.911259556Z"
