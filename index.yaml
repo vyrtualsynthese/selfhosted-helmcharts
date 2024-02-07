@@ -3,6 +3,20 @@ entries:
   autobrr:
   - apiVersion: v2
     appVersion: 1.36.0
+    created: "2024-02-07T13:55:11.203684532Z"
+    description: autobrr redefines download automation for torrents and Usenet, drawing
+      inspiration from tools like trackarr, autodl-irssi, and flexget. We've combined
+      the best of these worlds into one versatile tool that can do it all, and then
+      some.
+    digest: e61c26fc319f1104ddd52a231097bb1b564c2b42f3a8d2219e16e3093a8eb6eb
+    icon: https://github.com/autobrr/autobrr/blob/develop/.github/images/logo.png
+    name: autobrr
+    type: application
+    urls:
+    - https://github.com/vyrtualsynthese/selfhosted-helmcharts/releases/download/autobrr-0.1.1/autobrr-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.36.0
     created: "2024-02-07T10:51:25.483981Z"
     description: autobrr redefines download automation for torrents and Usenet, drawing
       inspiration from tools like trackarr, autodl-irssi, and flexget. We've combined
@@ -164,4 +178,4 @@ entries:
     urls:
     - https://github.com/vyrtualsynthese/selfhosted-helmcharts/releases/download/postgres-0.1.0/postgres-0.1.0.tgz
     version: 0.1.0
-generated: "2024-02-07T10:51:25.911259556Z"
+generated: "2024-02-07T13:55:11.203716181Z"
