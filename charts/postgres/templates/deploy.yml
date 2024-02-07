@@ -54,7 +54,6 @@ spec:
         volumeMounts:
           - name: db-storage
             mountPath: /var/lib/postgresql/data
-            subPath: postgres-data
         {{- with .Values.volumeMounts }}
           {{- toYaml . | nindent 12 }}
         {{- end }}
