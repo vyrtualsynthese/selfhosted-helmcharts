@@ -1,0 +1,17 @@
+{{- if eq .Values.storage.existingClaim "" }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "autobrr.fullname" . }}
+  labels:
+    {{- include "autobrr.labels" . | nindent 4 }}
+spec:
+  {{- with .Values.storage.class }}
+  storageClassName: {{ . }}
+  {{- end }}
+  accessModes:
+    - {{ .Values.storage.accessModes }}
+  resources:
+    requests:
+      storage: {{ .Values.storage.dataSize }}
+{{- end }}
