@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "autobrr.fullname" . }}
+  labels:
+    {{- include "autobrr.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  strategy:
+    type: {{ .Values.strategyType | default "Recreate" }}
+  selector:
+    matchLabels:
+      {{- include "autobrr.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "autobrr.labels" . | nindent 8 }}
+	{{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "autobrr.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+            - configMapRef:
+                name: {{ template "autobrr.fullname" . }}-env
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          startupProbe:
+            httpGet:
+              path: /healthz/liveness
+              port: {{ .Values.service.port }}
+            failureThreshold: 3
+            timeoutSeconds: 10
+            periodSeconds: 90
+            initialDelaySeconds: 40
+          livenessProbe:
+            httpGet:
+              path: /healthz/liveness
+              port: {{ .Values.service.port }}
+            failureThreshold: 3
+            timeoutSeconds: 10
+            periodSeconds: 90
+          readinessProbe:
+            httpGet:
+              path: /healthz/readiness
+              port: {{ .Values.service.port }}
+            failureThreshold: 3
+            timeoutSeconds: 10
+            periodSeconds: 90
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - mountPath: /config
+              name: {{ include "autobrr.fullname" . }}-conf
+          {{- with .Values.volumeMounts }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      volumes:
+        - name: {{ include "autobrr.fullname" . }}-conf
+          persistentVolumeClaim:
+            claimName: {{ default (printf (include "autobrr.fullname" .)) .Values.storage.existingClaim }}
+      {{- with .Values.volumes }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+{{- end }}
