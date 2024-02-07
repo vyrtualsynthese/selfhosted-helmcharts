@@ -29,6 +29,20 @@ entries:
     urls:
     - https://github.com/vyrtualsynthese/selfhosted-helmcharts/releases/download/autobrr-0.1.0/autobrr-0.1.0.tgz
     version: 0.1.0
+  bazarr:
+  - apiVersion: v2
+    appVersion: 1.4.1
+    created: "2024-02-07T16:55:37.838021521Z"
+    description: Bazarr is a companion application to Sonarr and Radarr. It manages
+      and downloads subtitles based on your requirements. You define your preferences
+      by TV show or movie and Bazarr takes care of everything for you.
+    digest: c921b8b245908f88381c1548da87ac348f75c451f9dc18004a60ec466abcc571
+    icon: https://www.bazarr.media/assets/img/logo.png
+    name: bazarr
+    type: application
+    urls:
+    - https://github.com/vyrtualsynthese/selfhosted-helmcharts/releases/download/bazarr-0.1.0/bazarr-0.1.0.tgz
+    version: 0.1.0
   dashy:
   - apiVersion: v2
     appVersion: 2.1.1
@@ -178,4 +192,4 @@ entries:
     urls:
     - https://github.com/vyrtualsynthese/selfhosted-helmcharts/releases/download/postgres-0.1.0/postgres-0.1.0.tgz
     version: 0.1.0
-generated: "2024-02-07T13:55:11.203716181Z"
+generated: "2024-02-07T16:55:37.838054061Z"
