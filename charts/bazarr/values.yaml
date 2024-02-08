@@ -80,14 +80,14 @@ storage:
     accessModes: ReadWriteOnce
     dataSize: 1Gi
     # -- Use an existing PersistentVolumeClaim, overrides values above
-    existingClaim: "test-config"
+    existingClaim: ""
 
   media:
     class: ~
     accessModes: ReadWriteOnce
     dataSize: 1Gi
     # -- Use an existing PersistentVolumeClaim, overrides values above
-    existingClaim: "test-media"
+    existingClaim: ""
 
 # Additional volumes on the output Deployment definition.
 volumes: []
