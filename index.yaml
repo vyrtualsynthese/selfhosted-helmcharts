@@ -32,6 +32,19 @@ entries:
   bazarr:
   - apiVersion: v2
     appVersion: 1.4.1
+    created: "2024-02-08T20:16:52.263308401Z"
+    description: Bazarr is a companion application to Sonarr and Radarr. It manages
+      and downloads subtitles based on your requirements. You define your preferences
+      by TV show or movie and Bazarr takes care of everything for you.
+    digest: f948058831e0a7303cac894d1b3be6d88374157c1189d492d7e90e55a18a0a4b
+    icon: https://www.bazarr.media/assets/img/logo.png
+    name: bazarr
+    type: application
+    urls:
+    - https://github.com/vyrtualsynthese/selfhosted-helmcharts/releases/download/bazarr-0.1.2/bazarr-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.4.1
     created: "2024-02-07T18:01:20.496822957Z"
     description: Bazarr is a companion application to Sonarr and Radarr. It manages
       and downloads subtitles based on your requirements. You define your preferences
@@ -56,6 +69,20 @@ entries:
     urls:
     - https://github.com/vyrtualsynthese/selfhosted-helmcharts/releases/download/bazarr-0.1.0/bazarr-0.1.0.tgz
     version: 0.1.0
+  calibre:
+  - apiVersion: v2
+    appVersion: 1.4.1
+    created: "2024-02-08T20:16:52.400116836Z"
+    description: calibre is a companion application to Sonarr and Radarr. It manages
+      and downloads subtitles based on your requirements. You define your preferences
+      by TV show or movie and calibre takes care of everything for you.
+    digest: 9d709ba78856e45343347538227fc1b61122f44d0851959e4bf5911b3ef600af
+    icon: https://www.calibre.media/assets/img/logo.png
+    name: calibre
+    type: application
+    urls:
+    - https://github.com/vyrtualsynthese/selfhosted-helmcharts/releases/download/calibre-0.1.2/calibre-0.1.2.tgz
+    version: 0.1.2
   dashy:
   - apiVersion: v2
     appVersion: 2.1.1
@@ -205,4 +232,4 @@ entries:
     urls:
     - https://github.com/vyrtualsynthese/selfhosted-helmcharts/releases/download/postgres-0.1.0/postgres-0.1.0.tgz
     version: 0.1.0
-generated: "2024-02-07T18:01:20.496852663Z"
+generated: "2024-02-08T20:16:52.400154787Z"
