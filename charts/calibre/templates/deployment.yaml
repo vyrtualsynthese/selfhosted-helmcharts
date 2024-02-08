@@ -1,0 +1,102 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "calibre.fullname" . }}
+  labels:
+    {{- include "calibre.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  strategy:
+    type: {{ .Values.strategyType | default "Recreate" }}
+  selector:
+    matchLabels:
+      {{- include "calibre.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "calibre.labels" . | nindent 8 }}
+	{{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "calibre.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+            - configMapRef:
+                name: {{ template "calibre.fullname" . }}-env
+          ports:
+            - name: gui
+              containerPort: {{ .Values.service.gui.port }}
+              protocol: TCP
+            - name: webui
+              containerPort: {{ .Values.service.webui.port }}
+              protocol: TCP
+          startupProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.service.gui.port }}
+            failureThreshold: 3
+            timeoutSeconds: 10
+            periodSeconds: 90
+            initialDelaySeconds: 40
+          livenessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.service.gui.port }}
+            failureThreshold: 3
+            timeoutSeconds: 10
+            periodSeconds: 90
+          readinessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.service.gui.port }}
+            failureThreshold: 3
+            timeoutSeconds: 10
+            periodSeconds: 90
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - mountPath: /config
+              name: {{ include "calibre.fullname" . }}-conf
+            - mountPath: /books
+              name: {{ include "calibre.fullname" . }}-books
+          {{- with .Values.volumeMounts }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      volumes:
+        - name: {{ include "calibre.fullname" . }}-conf
+          persistentVolumeClaim:
+            claimName: {{ default (printf "%s-config" (include "calibre.fullname" .)) .Values.storage.config.existingClaim }}
+        - name: {{ include "calibre.fullname" . }}-books
+          persistentVolumeClaim:
+            claimName: {{ default (printf "%s-books" (include "calibre.fullname" .)) .Values.storage.books.existingClaim }}
+      {{- with .Values.volumes }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+{{- end }}
