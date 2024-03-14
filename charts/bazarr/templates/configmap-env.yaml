@@ -1,4 +1,3 @@
-{{- if not (.Values.env.existingSecret) -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -8,5 +7,4 @@ metadata:
 data:
 {{- range $key, $value := .Values.env }}
   {{ $key }}: {{ $value | quote }}
-{{- end }}
 {{- end }}
