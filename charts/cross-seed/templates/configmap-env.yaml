@@ -1,0 +1,12 @@
+{{- if not (.Values.conf.existingSecret) -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "cross-seed.fullname" . }}-env
+  labels:
+    {{- include "cross-seed.labels" . | nindent 4 }}
+data:
+{{- range $key, $value := .Values.conf.content }}
+  {{ $key }}: {{ $value | quote }}
+{{- end }}
+{{- end }}
