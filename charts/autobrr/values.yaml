@@ -8,7 +8,7 @@ image:
   repository: ghcr.io/autobrr/autobrr
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.36.0"
+  tag: "v1.40.1"
 
 # Choose deployment strategy type
 strategyType: Recreate
