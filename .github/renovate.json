@@ -1,4 +1,5 @@
 {
   "baseBranches": ["develop"],
-  "extends": ["config:recommended", ":dependencyDashboard", "docker:enableMajor"]
+  "extends": ["config:recommended", ":dependencyDashboard", "docker:enableMajor"],
+  "bumpVersion": "patch"
 }
