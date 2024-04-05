@@ -1,0 +1,5 @@
+{
+  "baseBranches": ["develop"],
+  "extends": ["config:recommended", ":dependencyDashboard", "docker:enableMajor"],
+  "bumpVersion": "patch"
+}
