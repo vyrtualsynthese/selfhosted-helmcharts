@@ -1,12 +1,12 @@
 dependencies:
 - name: postgres
   repository: https://vyrtualsynthese.github.io/selfhosted-helmcharts/
-  version: 0.1.0
+  version: 0.1.3
 - name: firefly-iii
   repository: https://firefly-iii.github.io/kubernetes/
   version: 1.7.2
 - name: importer
   repository: https://firefly-iii.github.io/kubernetes/
   version: 1.3.1
-digest: sha256:164f8f0a71af5b9adcfe11de0c95c4259d48fad30de4c7f75fb83fdbfedacf1d
-generated: "2024-01-30T16:38:07.664416286+01:00"
+digest: sha256:25fafd59cdae3052089ed60f4dd18d554df89449a98b6449241656f3769e2a07
+generated: "2024-04-05T08:14:12.170277442Z"
