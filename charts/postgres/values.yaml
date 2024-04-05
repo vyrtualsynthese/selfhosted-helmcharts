@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: postgres
-  tag: 16.1-alpine3.19
+  tag: 16.2-alpine3.19
   pullPolicy: IfNotPresent
 
 # Choose deployment strategy type
