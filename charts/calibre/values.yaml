@@ -8,7 +8,7 @@ image:
   repository: ghcr.io/linuxserver/calibre
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 7.4.0
+  tag: 7.8.0
 
 # Choose deployment strategy type
 strategyType: Recreate
