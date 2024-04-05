@@ -3,7 +3,7 @@ postgres:
   enabled: true
   image:
     repository: postgres
-    tag: 10-alpine
+    tag: 16-alpine
     pullPolicy: IfNotPresent
 
   storage:
