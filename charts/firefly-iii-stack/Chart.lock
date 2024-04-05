@@ -4,9 +4,9 @@ dependencies:
   version: 0.1.0
 - name: firefly-iii
   repository: https://firefly-iii.github.io/kubernetes/
-  version: 1.7.2
+  version: 1.8.1
 - name: importer
   repository: https://firefly-iii.github.io/kubernetes/
   version: 1.3.1
-digest: sha256:164f8f0a71af5b9adcfe11de0c95c4259d48fad30de4c7f75fb83fdbfedacf1d
-generated: "2024-01-30T16:38:07.664416286+01:00"
+digest: sha256:56baaaa7e6581533b7564b23e57ca941865ae8d65ce821f04b9be68dd0308c1f
+generated: "2024-04-05T08:14:27.206508536Z"
