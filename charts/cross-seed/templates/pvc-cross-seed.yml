@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "cross-seed.fullname" . }}-cross-seed
+  name: {{ include "cross-seed.fullname" . }}
   labels:
     {{- include "cross-seed.labels" . | nindent 4 }}
 spec:

@@ -75,12 +75,6 @@ resources: {}
   #   memory: 128Mi
 
 storage:
-  config:
-    class: ~
-    accessModes: ReadWriteOnce
-    dataSize: 1Gi
-    # -- Use an existing PersistentVolumeClaim, overrides values above
-    existingClaim: ""
 
   crossSeed:
     class: ~
@@ -119,7 +113,7 @@ tolerations: []
 affinity: {}
 
 conf:
-  existingSecret: "false"
+  existingSecret: false
   secretName: ""
   content: |-
     "use strict";

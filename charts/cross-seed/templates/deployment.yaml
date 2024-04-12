@@ -33,82 +33,68 @@ spec:
       initContainers:
         - name: init-cross-seed-config
           image: busybox:1.35
-          command: [ 'sh', '-c', "cp /secret/* /config" ]
+          command: [ 'sh', '-c', "cp /configmap/* /config" ]
           volumeMounts:
             - mountPath: /config
-              name: cross-seed-config-volume
-            - mountPath: /secret
-              name: cross-seed-secrets
+              name: {{ include "cross-seed.fullname" . }}-config
+            - mountPath: /configmap
+              name: {{ include "cross-seed.fullname" . }}-configmap
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["cross-seed", "daemon"]
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
-          startupProbe:
-            httpGet:
-              path: /
-              port: {{ .Values.service.port }}
-            failureThreshold: 3
-            timeoutSeconds: 10
-            periodSeconds: 90
-            initialDelaySeconds: 40
-          livenessProbe:
-            httpGet:
-              path: /
-              port: {{ .Values.service.port }}
-            failureThreshold: 3
-            timeoutSeconds: 10
-            periodSeconds: 90
-          readinessProbe:
-            httpGet:
-              path: /
-              port: {{ .Values.service.port }}
-            failureThreshold: 3
-            timeoutSeconds: 10
-            periodSeconds: 90
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-            - name: qbittorrent-config-volume
+            - name: {{ include "cross-seed.fullname" . }}-torrents
               mountPath: /torrents
               subPath: {{ .Values.storage.torrents.subPath }}
             - mountPath: /config
-              name: cross-seed-config-volume
+              name: {{ include "cross-seed.fullname" . }}-config
             - mountPath: /cross-seed
-              name: cross-seed-volume
+              name: {{ include "cross-seed.fullname" . }}
+            {{- if (.Values.storage.data.enabled) -}}
+            - mountPath: /data
+              name: {{ include "cross-seed.fullname" . }}-data
+            {{- end }}
           {{- with .Values.volumeMounts }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
       volumes:
-        - name: torrents
+        - name: {{ include "cross-seed.fullname" . }}-torrents
           persistentVolumeClaim:
             claimName: {{ .Values.storage.torrents.existingClaim }}
         - name: {{ include "cross-seed.fullname" . }}
           persistentVolumeClaim:
             claimName: {{ default (printf (include "cross-seed.fullname" .)) .Values.storage.crossSeed.existingClaim }}
+        - name: {{ include "cross-seed.fullname" . }}-config
+          persistentVolumeClaim:
+            claimName: {{ default (printf "%s-config" (include "cross-seed.fullname" .)) }}
         {{- if (.Values.storage.data.enabled) -}}
         - name: {{ include "cross-seed.fullname" . }}-data
           persistentVolumeClaim:
             claimName: {{ default (printf "%s-data" (include "cross-seed.fullname" .)) .Values.storage.data.existingClaim }}
         {{- end }}
         {{ if not .Values.conf.existingSecret }}
-        - name: {{ include "cross-seed.fullname" . }}-config
+        - name: {{ include "cross-seed.fullname" . }}-configmap
           configMap:
             name: {{ include "cross-seed.fullname" . }}-config
             items:
-              - key: config.js
+              - key: "config.js"
                 path: config.js
         {{ else if .Values.conf.existingSecret }}
-        - name: {{ include "cross-seed.fullname" . }}-config
+        - name: {{ include "cross-seed.fullname" . }}-configmap
           secret:
             secretName: {{ .Values.conf.secretName }}
             items:
-              - key: config.js
+              - key: "config.js"
                 path: config.js
         {{ end }}
       {{- with .Values.volumes }}
