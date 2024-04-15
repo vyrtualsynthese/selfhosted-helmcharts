@@ -12,6 +12,14 @@ description: Fully-automatic cross-seeding
 # pipeline. Library charts do not define any templates and therefore cannot be deployed.
 type: application
 
+home: https://www.cross-seed.org/
+
+sources:
+  - https://github.com/cross-seed/cross-seed
+  - https://github.com/vyrtualsynthese/selfhosted-helmcharts
+
+icon: https://www.cross-seed.org/img/cross-seed.svg
+
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
