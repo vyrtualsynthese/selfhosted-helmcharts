@@ -1,0 +1,17 @@
+{{- if eq .Values.storage.crossSeed.existingClaim "" }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "cross-seed.fullname" . }}
+  labels:
+    {{- include "cross-seed.labels" . | nindent 4 }}
+spec:
+  {{- with .Values.storage.crossSeed.class }}
+  storageClassName: {{ . }}
+  {{- end }}
+  accessModes:
+    - {{ .Values.storage.crossSeed.accessModes }}
+  resources:
+    requests:
+      storage: {{ .Values.storage.crossSeed.dataSize }}
+{{- end }}
