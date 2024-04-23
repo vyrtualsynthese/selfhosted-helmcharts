@@ -198,6 +198,22 @@ entries:
     urls:
     - https://github.com/vyrtualsynthese/selfhosted-helmchart/releases/download/dashy-0.1.0/dashy-0.1.0.tgz
     version: 0.1.0
+  filebrowser:
+  - apiVersion: v2
+    appVersion: 2.28.0
+    created: "2024-04-23T13:27:43.673392882Z"
+    description: "\U0001F4C2 Web File Browser"
+    digest: d75a738436b0ddcc425a934298583dfd9f02121a852ef2a62a54fd0a1aa7448d
+    home: https://filebrowser.org/
+    icon: https://raw.githubusercontent.com/filebrowser/logo/master/banner.png
+    name: filebrowser
+    sources:
+    - https://github.com/filebrowser/filebrowser
+    - https://github.com/vyrtualsynthese/selfhosted-helmcharts
+    type: application
+    urls:
+    - https://github.com/vyrtualsynthese/selfhosted-helmcharts/releases/download/filebrowser-0.1.0/filebrowser-0.1.0.tgz
+    version: 0.1.0
   firefly-iii-stack:
   - apiVersion: v2
     created: "2024-04-15T08:29:26.711255761Z"
@@ -283,4 +299,4 @@ entries:
     urls:
     - https://github.com/vyrtualsynthese/selfhosted-helmcharts/releases/download/postgres-0.1.0/postgres-0.1.0.tgz
     version: 0.1.0
-generated: "2024-04-15T08:29:26.819956101Z"
+generated: "2024-04-23T13:27:43.673447353Z"
