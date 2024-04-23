@@ -1,0 +1,120 @@
+# Default values for cross-seed.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: filebrowser/filebrowser
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "v2.28.0"
+
+# Choose deployment strategy type
+strategyType: Recreate
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Automatically mount a ServiceAccount's API credentials?
+  automount: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+storage:
+  config:
+    class: ~
+    accessModes: ReadWriteOnce
+    dataSize: 1Gi
+    # -- Use an existing PersistentVolumeClaim, overrides values above
+    existingClaim: ""
+
+  database:
+    class: ~
+    accessModes: ReadWriteOnce
+    dataSize: 1Gi
+    subPath: ""
+    # -- Use an existing PersistentVolumeClaim, overrides values above
+    existingClaim: ""
+
+# Additional volumes on the output Deployment definition.
+volumes: []
+
+# Additional volumeMounts on the output Deployment definition.
+volumeMounts: []
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+env:
+  #FB_ADDRESS: ""
+  #FB_BASEURL: ""
+  #FB_CERT: ""
+  FB_CONFIG: "/config/settings.json"
+  FB_DATABASE: "/database/filebrowser.db"
+  #FB_KEY: ""
+  #FB_LOG: ""
+  #FB_NOAUTH: ""
+  ## hashed password (bcrypt) for the first user when using quick config (default "admin")
+  #FB_PASSWORD: ""
+  #FB_PORT: ""
+  #FB_ROOT: ""
+  #FB_USERNAME: ""
+  # -- Set this to the name of a secret to load environment variables from. If defined, values in the secret will override values in configs
+  existingSecret: ""
