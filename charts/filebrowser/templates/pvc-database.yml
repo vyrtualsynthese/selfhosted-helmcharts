@@ -1,0 +1,17 @@
+{{- if eq .Values.storage.database.existingClaim "" }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "filebrowser.fullname" . }}-database
+  labels:
+    {{- include "filebrowser.labels" . | nindent 4 }}
+spec:
+  {{- with .Values.storage.database.class }}
+  storageClassName: {{ . }}
+  {{- end }}
+  accessModes:
+    - {{ .Values.storage.database.accessModes }}
+  resources:
+    requests:
+      storage: {{ .Values.storage.database.dataSize }}
+{{- end }}
