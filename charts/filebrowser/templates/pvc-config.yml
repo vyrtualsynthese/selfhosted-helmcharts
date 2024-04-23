@@ -1,0 +1,17 @@
+{{- if eq .Values.storage.config.existingClaim "" }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "filebrowser.fullname" . }}-config
+  labels:
+    {{- include "filebrowser.labels" . | nindent 4 }}
+spec:
+  {{- with .Values.storage.config.class }}
+  storageClassName: {{ . }}
+  {{- end }}
+  accessModes:
+    - {{ .Values.storage.config.accessModes }}
+  resources:
+    requests:
+      storage: {{ .Values.storage.config.dataSize }}
+{{- end }}
