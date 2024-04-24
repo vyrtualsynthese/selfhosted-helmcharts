@@ -53,7 +53,7 @@ spec:
           startupProbe:
             httpGet:
               path: /health
-              port: {{ .Values.service.gui.port }}
+              port: {{ .Values.service.port }}
             failureThreshold: 3
             timeoutSeconds: 10
             periodSeconds: 90
@@ -61,14 +61,14 @@ spec:
           livenessProbe:
             httpGet:
               path: /health
-              port: {{ .Values.service.gui.port }}
+              port: {{ .Values.service.port }}
             failureThreshold: 3
             timeoutSeconds: 10
             periodSeconds: 90
           readinessProbe:
             httpGet:
               path: /health
-              port: {{ .Values.service.gui.port }}
+              port: {{ .Values.service.port }}
             failureThreshold: 3
             timeoutSeconds: 10
             periodSeconds: 90
