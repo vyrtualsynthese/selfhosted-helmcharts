@@ -50,6 +50,28 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
+          startupProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.service.gui.port }}
+            failureThreshold: 3
+            timeoutSeconds: 10
+            periodSeconds: 90
+            initialDelaySeconds: 40
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.service.gui.port }}
+            failureThreshold: 3
+            timeoutSeconds: 10
+            periodSeconds: 90
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.service.gui.port }}
+            failureThreshold: 3
+            timeoutSeconds: 10
+            periodSeconds: 90
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
