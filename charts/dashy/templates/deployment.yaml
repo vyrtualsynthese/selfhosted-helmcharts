@@ -53,28 +53,27 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           startupProbe:
-            exec:
-              command:
-                - yarn
-                - health-check
-            failureThreshold: 3
-            timeoutSeconds: 10
-            periodSeconds: 90
-            initialDelaySeconds: 40
+            httpGet:
+              path: {{ .Values.probs.path }}
+              port: {{ .Values.service.port }}
+            failureThreshold: {{ .Values.probs.failureThreshold }}
+            timeoutSeconds: {{ .Values.probs.timeoutSeconds }}
+            periodSeconds: {{ .Values.probs.periodSeconds }}
+            initialDelaySeconds: {{ .Values.probs.initialDelaySeconds }}
           livenessProbe:
-            exec:
-              command:
-                - yarn
-                - health-check
-            failureThreshold: 3
-            timeoutSeconds: 10
-            periodSeconds: 90
+            httpGet:
+              path: {{ .Values.probs.path }}
+              port: {{ .Values.service.port }}
+            failureThreshold: {{ .Values.probs.failureThreshold }}
+            timeoutSeconds: {{ .Values.probs.timeoutSeconds }}
+            periodSeconds: {{ .Values.probs.periodSeconds }}
           readinessProbe:
             httpGet:
-              port: 80
-            failureThreshold: 3
-            timeoutSeconds: 10
-            periodSeconds: 90
+              path: {{ .Values.probs.path }}
+              port: {{ .Values.service.port }}
+            failureThreshold: {{ .Values.probs.failureThreshold }}
+            timeoutSeconds: {{ .Values.probs.timeoutSeconds }}
+            periodSeconds: {{ .Values.probs.periodSeconds }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:

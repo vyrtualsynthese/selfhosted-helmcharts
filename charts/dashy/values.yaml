@@ -31,6 +31,13 @@ serviceAccount:
 podAnnotations: {}
 podLabels: {}
 
+probs:
+  failureThreshold: 3
+  timeoutSeconds: 10
+  periodSeconds: 90
+  initialDelaySeconds: 40
+  path: ""
+
 podSecurityContext: {}
   # fsGroup: 2000
 
