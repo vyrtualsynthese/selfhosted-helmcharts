@@ -8,7 +8,7 @@ image:
   repository: lissy93/dashy
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "2.1.2"
+  tag: "release-3.1.1"
 
 # Choose deployment strategy type
 strategyType: Recreate
@@ -36,7 +36,7 @@ probs:
   timeoutSeconds: 10
   periodSeconds: 90
   initialDelaySeconds: 40
-  path: ""
+  path: "/"
 
 podSecurityContext: {}
   # fsGroup: 2000
@@ -51,7 +51,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 80
+  port: 8080
 
 ingress:
   enabled: false
@@ -102,7 +102,7 @@ affinity: {}
 
 env:
   NODE_ENV: "production"
-  PORT: "80"
+  PORT: 8080
   #HOST: ""
   #BASE_URL: ""
   #VUE_APP_DOMAIN: ""
