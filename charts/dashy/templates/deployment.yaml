@@ -78,7 +78,7 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             {{ if .Values.static.enabled }}
-            - mountPath: /app/public/conf.yml
+            - mountPath: /app/user-data/conf.yml
               subPath: conf.yml
               name: {{ include "dashy.fullname" . }}-conf
             {{ end }}
