@@ -45,26 +45,26 @@ spec:
               protocol: TCP
           startupProbe:
             httpGet:
-              path: /healthz/liveness
-              port: {{ .Values.service.port }}
-            failureThreshold: 3
-            timeoutSeconds: 10
-            periodSeconds: 90
-            initialDelaySeconds: 40
+              path: { { .Values.probs.path.startup } }
+              port: { { .Values.service.port } }
+            failureThreshold: { { .Values.probs.failureThreshold } }
+            timeoutSeconds: { { .Values.probs.timeoutSeconds } }
+            periodSeconds: { { .Values.probs.periodSeconds } }
+            initialDelaySeconds: { { .Values.probs.initialDelaySeconds } }
           livenessProbe:
             httpGet:
-              path: /healthz/liveness
-              port: {{ .Values.service.port }}
-            failureThreshold: 3
-            timeoutSeconds: 10
-            periodSeconds: 90
+              path: { { .Values.probs.path.startup } }
+              port: { { .Values.service.port } }
+            failureThreshold: { { .Values.probs.failureThreshold } }
+            timeoutSeconds: { { .Values.probs.timeoutSeconds } }
+            periodSeconds: { { .Values.probs.periodSeconds } }
           readinessProbe:
             httpGet:
-              path: /healthz/readiness
-              port: {{ .Values.service.port }}
-            failureThreshold: 3
-            timeoutSeconds: 10
-            periodSeconds: 90
+              path: { { .Values.probs.path.readiness } }
+              port: { { .Values.service.port } }
+            failureThreshold: { { .Values.probs.failureThreshold } }
+            timeoutSeconds: { { .Values.probs.timeoutSeconds } }
+            periodSeconds: { { .Values.probs.periodSeconds } }
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
