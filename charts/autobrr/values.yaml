@@ -77,7 +77,7 @@ resources: {}
 probs:
   failureThreshold: 3
   timeoutSeconds: 10
-  periodSeconds: 90
+  periodSeconds: 3600
   initialDelaySeconds: 40
   path:
     startup: "/healthz/liveness"
