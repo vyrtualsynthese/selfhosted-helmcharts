@@ -10,6 +10,9 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "release-3.1.1"
 
+command: []
+args: []
+
 # Choose deployment strategy type
 strategyType: Recreate
 
